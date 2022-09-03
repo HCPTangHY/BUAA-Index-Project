@@ -6,7 +6,12 @@ if ($data['type'] == 'askInfoByClass') {
     $class = $data['class'];
     $result = $conn->query("SELECT * FROM Students WHERE class='$class'");
     $info = $result->fetch_all();
-    
+    $info = json_encode($info,JSON_UNESCAPED_UNICODE);
+    echo $info;
+}
+elseif ($data['type'] == 'askInfoAll') {
+    $result = $conn->query("SELECT * FROM Students");
+    $info = $result->fetch_all();
     $info = json_encode($info,JSON_UNESCAPED_UNICODE);
     echo $info;
 }

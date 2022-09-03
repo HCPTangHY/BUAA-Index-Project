@@ -18,10 +18,32 @@
             class : classOption
         }, function(data){
             data = $.parseJSON(data);
+            $('#stuInfo').html('');
             for (let i = 0; i < data.length; i++) {
-                $('#stuInfo').append("<tr class=''><td scope='row'>"+data[i][0]+"</td><td>"+data[i][1]+"</td><td>"+data[i][4]+"</td><td>"+data[i][5]+"</td></tr>")
+                $('#stuInfo').append("<tr class='' id='"+data[i][0]+"' onclick='selected("+data[i][0]+")'><td scope='row'>"+data[i][0]+"</td><td>"+data[i][1]+"</td><td>"+data[i][4]+"</td><td>"+data[i][5]+"</td></tr>")
             }
         });
+    }
+
+    function askAll() {
+        $.get('InfoAsk.php', {
+            type : "askInfoAll",
+        }, function(data){
+            data = $.parseJSON(data);
+            $('#stuInfo').html('');
+            for (let i = 0; i < data.length; i++) {
+                $('#stuInfo').append("<tr class='' id='"+data[i][0]+"' onclick='selected("+data[i][0]+")'><td scope='row'>"+data[i][0]+"</td><td>"+data[i][1]+"</td><td>"+data[i][4]+"</td><td>"+data[i][5]+"</td></tr>")
+            }
+        });
+    }
+
+    function selected(id) {
+        if (($('#'+id+'').css("background-color") == 'rgba(0, 0, 0, 0)')) {
+            $('#'+id+'').css("background-color","Aqua");
+        }
+        else {
+            $('#'+id+'').css("background-color","rgba(0, 0, 0, 0)");
+        }
     }
 </script>
 <body>
@@ -48,7 +70,7 @@
                                 <button type="button" class="btn btn-primary small" onclick="askList()">查询</button>
                             </div>
                             <div class="col">
-                                <button type="button" class="btn btn-primary small">查询全部</button>
+                                <button type="button" class="btn btn-primary small" onclick="askAll()">查询全部</button>
                             </div>
                         </div>
                     </div>
