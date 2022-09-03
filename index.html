@@ -17,9 +17,11 @@
             type : "askInfoByClass",
             class : classOption
         }, function(data){
-            alert(data);
+            data = $.parseJSON(data);
+            for (let i = 0; i < data.length; i++) {
+                $('#stuInfo').append("<tr class=''><td scope='row'>"+data[i][0]+"</td><td>"+data[i][1]+"</td><td>"+data[i][4]+"</td><td>"+data[i][5]+"</td></tr>")
+            }
         });
-        
     }
 </script>
 <body>
@@ -51,7 +53,21 @@
                         </div>
                     </div>
                     <div class="card-body">
-
+                        <div class="table-hover">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">学号</th>
+                                        <th scope="col">姓名</th>
+                                        <th scope="col">班级</th>
+                                        <th scope="col">宿舍</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="stuInfo">
+                                </tbody>
+                            </table>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
